@@ -1,28 +1,27 @@
-package org.example.Plans;
+package org.example.Features;
 
 import java.sql.Timestamp;
 
-public class Plans {
-    private long id;
-    private String name;
-    private String description;
-    private String uuid;
-    private Timestamp updated_at;
-    private String updated_by;
+public class features {
+        private long id;
+        private String name;
+        private String description;
+        private Timestamp updated_at;
+        private String updated_by;
+        private String uuid;
 
     public long getId() {
+
         return id;
     }
 
     public void setId(long id) {
         this.id = id;
     }
-
-    public String getName() {
+    public String getName(){
         return name;
     }
-
-    public void setName(String name) {
+    public void setName(String name){
         this.name = name;
     }
 
@@ -32,14 +31,6 @@ public class Plans {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
     }
 
     public Timestamp getUpdated_at() {
@@ -56,5 +47,13 @@ public class Plans {
 
     public void setUpdated_by(String updated_by) {
         this.updated_by = updated_by;
+    }
+
+    public String getUuid() {
+        return uuid;
+    }
+
+    public void setUuid(String uuid) {
+        this.uuid = uuid;
     }
 }

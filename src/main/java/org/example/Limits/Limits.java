@@ -1,12 +1,10 @@
-package org.example.Plans;
+package org.example.Limits;
 
 import java.sql.Timestamp;
 
-public class Plans {
+public class Limits {
     private long id;
-    private String name;
-    private String description;
-    private String uuid;
+    private int limit;
     private Timestamp updated_at;
     private String updated_by;
 
@@ -18,28 +16,12 @@ public class Plans {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public long getLimit() {
+        return limit;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUuid() {
-        return uuid;
-    }
-
-    public void setUuid(String uuid) {
-        this.uuid = uuid;
+    public void setLimit(int limit) {
+        this.limit = limit;
     }
 
     public Timestamp getUpdated_at() {

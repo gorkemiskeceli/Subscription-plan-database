@@ -1,12 +1,11 @@
-package org.example.Plans;
+package org.example.User_feature_limits;
 
 import java.sql.Timestamp;
 
-public class Plans {
+public class UserFeatureLimits {
     private long id;
-    private String name;
-    private String description;
     private String uuid;
+    private int limits;
     private Timestamp updated_at;
     private String updated_by;
 
@@ -17,29 +16,20 @@ public class Plans {
     public void setId(long id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public String getUuid() {
+    public String getUuid(){
         return uuid;
     }
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public int getLimits() {
+        return limits;
+    }
+
+    public void setLimits(int limits) {
+        this.limits = limits;
     }
 
     public Timestamp getUpdated_at() {
