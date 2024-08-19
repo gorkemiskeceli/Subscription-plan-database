@@ -2,6 +2,7 @@ package org.example.Plans;
 
 import org.example.Config.DataBaseConnectorConfig;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,5 +26,21 @@ public class PlansRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public Plans createPlans(Plans plans){
+        String query = "INSERT INTO plans(name, description, uuid, updated_at, updated_by) VALUES (?,?,?,?,?)";
+            try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+                statement.setString(1, plans.getName());
+                statement.setString(2, plans.getDescription());
+                statement.setString(3, plans.getUuid());
+                statement.setTimestamp(4, plans.getUpdated_at());
+                statement.setString(5, plans.getUpdated_by());
+                statement.executeUpdate();
+                System.out.println("Plan" + plans.getName() + "has been created at database...");
+            }catch (SQLException e){
+                throw new RuntimeException(e);
+            }
+
+        return plans;
     }
 }

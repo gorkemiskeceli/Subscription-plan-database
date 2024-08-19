@@ -2,6 +2,8 @@ package org.example.Features;
 
 import org.example.Config.DataBaseConnectorConfig;
 
+import java.awt.*;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -26,5 +28,20 @@ public class featuresRepository {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public features createFeatures(features features){
+        String query = "INSERT INTO fetures(name, description, updated_at, updated_by, uuid) VALUES (?,?,?,?,?)";
+        try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+            statement.setString(1, features.getName());
+            statement.setString(2, features.getDescription());
+            statement.setTimestamp(3, features.getUpdated_at());
+            statement.setString(4, features.getDescription());
+            statement.setString(5, features.getUuid());
+            statement.executeUpdate();
+            System.out.println("Feature has been saved with name of:" +features.getName());
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return features;
     }
 }

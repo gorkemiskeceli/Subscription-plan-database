@@ -1,7 +1,9 @@
 package org.example.Limits;
 
 import org.example.Config.DataBaseConnectorConfig;
+import org.example.User_subscriptions.UserSubscriptions;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -29,4 +31,16 @@ public class LimitsRepository {
 
 
     }
+  public Limits createLimits(Limits limits){
+        String query = "INSER INTO limits(updated_at, updated_by) VALUES (?,?)";
+        try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+            statement.setTimestamp(1, limits.getUpdated_at());
+            statement.setString(2, limits.getUpdated_by());
+           statement.executeUpdate();
+            System.out.println("Limits have been updated!!!");
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+   return limits;
+  }
 }

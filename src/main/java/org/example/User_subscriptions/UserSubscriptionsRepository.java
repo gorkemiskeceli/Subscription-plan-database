@@ -2,6 +2,7 @@ package org.example.User_subscriptions;
 
 import org.example.Config.DataBaseConnectorConfig;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.UUID;
@@ -33,5 +34,22 @@ public class UserSubscriptionsRepository {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+    public UserSubscriptions createUserSubscriptions(UserSubscriptions userSubscriptions){
+        String query = "INSERT INTO user_subscriptions(uuid, start_date, end_date, renewal_date, status, updated_at, updated_by) VALUES (?,?,?,?,?,?,?)";
+        try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+            statement.setString(1, userSubscriptions.getUuid());
+            statement.setTimestamp(2, userSubscriptions.getStart_date());
+            statement.setTimestamp(3, userSubscriptions.getEnd_date());
+            statement.setTimestamp(4, userSubscriptions.getRenewal_date());
+            statement.setString(5, userSubscriptions.getStatus());
+            statement.setTimestamp(6, userSubscriptions.getUpdate_at());
+            statement.setString(7, userSubscriptions.getUpdated_by());
+            statement.executeUpdate();
+            System.out.println("User subscriptions have been updated...");
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+        return userSubscriptions;
     }
 }

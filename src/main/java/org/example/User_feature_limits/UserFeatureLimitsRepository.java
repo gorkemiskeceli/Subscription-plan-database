@@ -2,6 +2,7 @@ package org.example.User_feature_limits;
 
 import org.example.Config.DataBaseConnectorConfig;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -28,4 +29,22 @@ public class UserFeatureLimitsRepository {
             throw new RuntimeException(e);
         }
     }
+    public UserFeatureLimits createUserFeatureLimits(UserFeatureLimits userFeatureLimits){
+       String query = "INSERT INTO user_feature_limits(uuid, limits, updated_at, updated_by) VALUES (?,?,?,?)";
+       try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+           statement.setString(1, userFeatureLimits.getUuid());
+           statement.setInt(2, userFeatureLimits.getLimits());
+           statement.setTimestamp(3, userFeatureLimits.getUpdated_at());
+           statement.setString(4, userFeatureLimits.getUpdated_by());
+           statement.executeUpdate();
+           System.out.println("Limits have been updated...");
+       }catch (SQLException e){
+           throw new RuntimeException(e);
+       }
+
+
+
+        return userFeatureLimits;
+    }
+
 }

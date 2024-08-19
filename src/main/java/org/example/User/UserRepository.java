@@ -2,6 +2,7 @@ package org.example.User;
 
 import org.example.Config.DataBaseConnectorConfig;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -25,5 +26,22 @@ public class UserRepository {
         }catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+    public User createUser(User user){
+        String query = "INSERT INTO user(name, uuid, email, updated_at) VALUES (?,?,?,?)";
+        try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
+            statement.setString(1, user.getName());
+            statement.setString(2, user.getUuid());
+            statement.setString(3, user.getEmail());
+            statement.setTimestamp(4, user.getUpdated_at());
+
+            statement.executeUpdate();
+            System.out.println("User:" + user.getName() + "has been created in database...");
+        }catch (SQLException e){
+            throw new RuntimeException(e);
+        }
+
+
+        return user;
     }
 }
