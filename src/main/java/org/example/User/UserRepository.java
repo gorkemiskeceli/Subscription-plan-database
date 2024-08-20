@@ -27,6 +27,7 @@ public class UserRepository {
             throw new RuntimeException(e);
         }
     }
+
     public User createUser(User user){
         String query = "INSERT INTO \"user\"(name, uuid, email, updated_at) VALUES (?,?,?,?)";
         try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
@@ -44,4 +45,5 @@ public class UserRepository {
 
         return user;
     }
+
 }

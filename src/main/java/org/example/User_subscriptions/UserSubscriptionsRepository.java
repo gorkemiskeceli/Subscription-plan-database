@@ -36,6 +36,7 @@ public class UserSubscriptionsRepository {
             throw new RuntimeException(e);
         }
     }
+
     public void createUserSubscriptions(String uuid, long user_id, long plans_id, Timestamp start_date, Timestamp end_date, Timestamp renewal_date, String status, Timestamp updated_at, String updated_by){
         String query = "INSERT INTO user_subscriptions(uuid, user_id, plans_id, start_date, end_date, renewal_date, status, updated_at, updated_by) VALUES (?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
@@ -56,4 +57,5 @@ public class UserSubscriptionsRepository {
             throw new RuntimeException(e);
         }
     }
+
 }
