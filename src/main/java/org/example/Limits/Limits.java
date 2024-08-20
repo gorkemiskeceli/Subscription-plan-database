@@ -4,7 +4,7 @@ import java.sql.Timestamp;
 
 public class Limits {
     private long id;
-    private int limit;
+    private int limit_value;
     private Timestamp updated_at;
     private String updated_by;
 
@@ -17,11 +17,11 @@ public class Limits {
     }
 
     public long getLimit() {
-        return limit;
+        return limit_value;
     }
 
-    public void setLimit(int limit) {
-        this.limit = limit;
+    public void setLimit_value(int limit_value) {
+        this.limit_value = limit_value;
     }
 
     public Timestamp getUpdated_at() {

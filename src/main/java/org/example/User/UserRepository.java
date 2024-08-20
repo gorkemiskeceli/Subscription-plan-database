@@ -28,7 +28,7 @@ public class UserRepository {
         }
     }
     public User createUser(User user){
-        String query = "INSERT INTO user(name, uuid, email, updated_at) VALUES (?,?,?,?)";
+        String query = "INSERT INTO \"user\"(name, uuid, email, updated_at) VALUES (?,?,?,?)";
         try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
             statement.setString(1, user.getName());
             statement.setString(2, user.getUuid());

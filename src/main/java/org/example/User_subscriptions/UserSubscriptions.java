@@ -11,7 +11,7 @@ public class UserSubscriptions {
     private Timestamp end_date;
     private Timestamp renewal_date;
     private String status;
-    private Timestamp update_at;
+    private Timestamp updated_at;
     private String updated_by;
 
     public long getId() {
@@ -62,12 +62,12 @@ public class UserSubscriptions {
         this.status = status;
     }
 
-    public Timestamp getUpdate_at() {
-        return update_at;
+    public Timestamp getUpdated_at() {
+        return updated_at;
     }
 
-    public void setUpdate_at(Timestamp update_at) {
-        this.update_at = update_at;
+    public void setUpdated_at(Timestamp updated_at) {
+        this.updated_at = updated_at;
     }
 
     public String getUpdated_by() {

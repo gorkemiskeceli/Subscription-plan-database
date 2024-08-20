@@ -5,6 +5,7 @@ import org.example.Config.DataBaseConnectorConfig;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.UUID;
 
 public class UserSubscriptionsRepository {
@@ -35,21 +36,24 @@ public class UserSubscriptionsRepository {
             throw new RuntimeException(e);
         }
     }
-    public UserSubscriptions createUserSubscriptions(UserSubscriptions userSubscriptions){
-        String query = "INSERT INTO user_subscriptions(uuid, start_date, end_date, renewal_date, status, updated_at, updated_by) VALUES (?,?,?,?,?,?,?)";
+    public void createUserSubscriptions(String uuid, long user_id, long plans_id, Timestamp start_date, Timestamp end_date, Timestamp renewal_date, String status, Timestamp updated_at, String updated_by){
+        String query = "INSERT INTO user_subscriptions(uuid, user_id, plans_id, start_date, end_date, renewal_date, status, updated_at, updated_by) VALUES (?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement statement = DataBaseConnectorConfig.getConnection().prepareStatement(query)){
-            statement.setString(1, userSubscriptions.getUuid());
-            statement.setTimestamp(2, userSubscriptions.getStart_date());
-            statement.setTimestamp(3, userSubscriptions.getEnd_date());
-            statement.setTimestamp(4, userSubscriptions.getRenewal_date());
-            statement.setString(5, userSubscriptions.getStatus());
-            statement.setTimestamp(6, userSubscriptions.getUpdate_at());
-            statement.setString(7, userSubscriptions.getUpdated_by());
-            statement.executeUpdate();
-            System.out.println("User subscriptions have been updated...");
+             statement.setString(1, uuid);
+             statement.setLong(2, user_id);
+             statement.setLong(3, plans_id);
+             statement.setTimestamp(4, start_date);
+             statement.setTimestamp(5, end_date);
+             statement.setTimestamp(6, renewal_date);
+             statement.setString(7, status);
+             statement.setTimestamp(8, updated_at);
+             statement.setString(9, updated_by);
+             statement.execute();
+
+            System.out.println("User subscription has been created...");
+
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
-        return userSubscriptions;
     }
 }
