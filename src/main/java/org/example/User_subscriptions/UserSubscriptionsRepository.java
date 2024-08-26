@@ -1,11 +1,11 @@
 package org.example.User_subscriptions;
 
 import org.example.Config.DataBaseConnectorConfig;
+import org.example.User.User;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.Timestamp;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class UserSubscriptionsRepository {
@@ -56,6 +56,41 @@ public class UserSubscriptionsRepository {
         }catch (SQLException e){
             throw new RuntimeException(e);
         }
+    }
+
+    public static List<User> listNonActiveUsers() {
+        // Fixed SQL query string with proper spacing
+        String query = "SELECT u.id, u.name, u.uuid, u.email, u.updated_at " +
+                "FROM \"user\" u " +
+                "JOIN user_subscriptions us ON u.id = us.user_id " +
+                "WHERE us.status != 'active';";
+        List<User> nonActiveUsers = new ArrayList<>();
+
+        try (Connection connection = DataBaseConnectorConfig.getConnection();
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            while (resultSet.next()) {
+                long id = resultSet.getLong("id");
+                String name = resultSet.getString("name");
+                String email = resultSet.getString("email");
+                String uuid = resultSet.getString("uuid");
+                Timestamp updatedAt = resultSet.getTimestamp("updated_at");
+
+                User user = new User();
+                user.setId(id);
+                user.setName(name);
+                user.setEmail(email);
+                user.setUuid(uuid);
+                user.setUpdated_at(updatedAt);
+
+                nonActiveUsers.add(user);
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        return nonActiveUsers;
     }
 
 }

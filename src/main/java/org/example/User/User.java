@@ -48,4 +48,16 @@ public class User {
     public void setUpdated_at(Timestamp updated_at) {
         this.updated_at = updated_at;
     }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", uuid='"+ uuid + '\''+
+                ", email='" + email + '\'' +
+                ", updated_at='" + updated_at + '\'' +
+                '}';
+
+    }
 }
