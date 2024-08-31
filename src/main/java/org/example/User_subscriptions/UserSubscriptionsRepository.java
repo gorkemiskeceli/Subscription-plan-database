@@ -83,7 +83,6 @@ public class UserSubscriptionsRepository {
                 user.setEmail(email);
                 user.setUuid(uuid);
                 user.setUpdated_at(updatedAt);
-
                 nonActiveUsers.add(user);
             }
         } catch (SQLException e) {
